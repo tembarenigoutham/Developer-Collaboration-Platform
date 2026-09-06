@@ -77,13 +77,24 @@ export const GitHubPage = () => {
         api.get(`/github/repos/${owner}/${repo}/pulls`).catch(() => ({ data: [] }))
       ]);
 
-      setRepoDetails(dRes.data);
-      setCommits(cRes.data || []);
-      setBranches(bRes.data || []);
-      setIssues(iRes.data || []);
-      setPulls(pRes.data || []);
+      const extractArray = (res) => {
+        if (Array.isArray(res)) return res;
+        if (Array.isArray(res?.data)) return res.data;
+        if (Array.isArray(res?.data?.data)) return res.data.data;
+        return [];
+      };
+
+      setRepoDetails(dRes?.data || dRes || null);
+      setCommits(extractArray(cRes));
+      setBranches(extractArray(bRes));
+      setIssues(extractArray(iRes));
+      setPulls(extractArray(pRes));
     } catch (e) {
       console.error(e);
+      setCommits([]);
+      setBranches([]);
+      setIssues([]);
+      setPulls([]);
     } finally {
       setLoading(false);
     }
@@ -258,17 +269,17 @@ export const GitHubPage = () => {
         <div className="card">
           <div className="card-header">
             <h2 className="card-title" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '1.05rem' }}>
-              <GitCommit size={18} /> Recent Commits ({commits.length})
+              <GitCommit size={18} /> Recent Commits ({Array.isArray(commits) ? commits.length : 0})
             </h2>
           </div>
 
-          {commits.length === 0 ? (
+          {!Array.isArray(commits) || commits.length === 0 ? (
             <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>No commits found</p>
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-              {commits.slice(0, 8).map((c) => (
+              {(Array.isArray(commits) ? commits : []).slice(0, 8).map((c) => (
                 <div
-                  key={c.sha}
+                  key={c.sha || Math.random()}
                   style={{
                     padding: '0.75rem',
                     backgroundColor: 'var(--bg-subtle)',
@@ -281,7 +292,7 @@ export const GitHubPage = () => {
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', color: 'var(--text-muted)' }}>
                     <span>{c.author} &bull; <code>{c.sha}</code></span>
-                    <span>{new Date(c.date).toLocaleDateString()}</span>
+                    <span>{c.date ? new Date(c.date).toLocaleDateString() : 'Recent'}</span>
                   </div>
                 </div>
               ))}
@@ -295,17 +306,17 @@ export const GitHubPage = () => {
           <div className="card">
             <div className="card-header">
               <h2 className="card-title" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '1.05rem' }}>
-                <GitPullRequest size={18} /> Pull Requests ({pulls.length})
+                <GitPullRequest size={18} /> Pull Requests ({Array.isArray(pulls) ? pulls.length : 0})
               </h2>
             </div>
 
-            {pulls.length === 0 ? (
+            {!Array.isArray(pulls) || pulls.length === 0 ? (
               <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>No open pull requests recorded.</p>
             ) : (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
-                {pulls.slice(0, 5).map((pr) => (
+                {(Array.isArray(pulls) ? pulls : []).slice(0, 5).map((pr) => (
                   <div
-                    key={pr.id}
+                    key={pr.id || pr.number || Math.random()}
                     style={{
                       padding: '0.65rem 0.75rem',
                       backgroundColor: 'var(--bg-subtle)',
@@ -333,14 +344,14 @@ export const GitHubPage = () => {
           <div className="card">
             <div className="card-header">
               <h2 className="card-title" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '1.05rem' }}>
-                <GitBranch size={18} /> Active Branches ({branches.length})
+                <GitBranch size={18} /> Active Branches ({Array.isArray(branches) ? branches.length : 0})
               </h2>
             </div>
 
             <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-              {branches.slice(0, 12).map((b) => (
+              {(Array.isArray(branches) ? branches : []).slice(0, 12).map((b) => (
                 <span
-                  key={b.name}
+                  key={b.name || Math.random()}
                   className="badge badge-primary"
                   style={{ textTransform: 'none', padding: '0.35rem 0.65rem' }}
                 >

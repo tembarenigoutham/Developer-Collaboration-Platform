@@ -323,7 +323,188 @@ export const INITIAL_MOCK_DATA = {
     { id: 2, type: "ISSUE_REPORTED", message: "Sarah reported issue: Database pool timeout on concurrent batch requests", is_read: 1, created_at: "2026-09-06T16:49:17.000Z" },
     { id: 3, type: "TASK_ASSIGNED", message: "You were assigned task: Configure MySQL connection pool & migrations", is_read: 1, created_at: "2026-09-06T16:49:17.000Z" },
     { id: 4, type: "REVIEW_APPROVED", message: 'Goutham Reddy approved your code review "Feature: Centralized error handling and API health probe".', is_read: 0, created_at: "2026-09-06T17:36:40.000Z" }
+  ],
+
+  documents: [
+    {
+      id: 1,
+      project_id: 1,
+      title: "Architecture Design Document",
+      content: "# Cloud Storage Microservice\n\n## Overview\nThis service provides distributed chunked uploads and high-availability storage orchestration.\n\n## Security\nAll endpoints require JWT Bearer authentication.",
+      document_type: "SUMMARY",
+      created_by: 1,
+      created_at: "2026-09-06T16:49:17.000Z",
+      updated_at: "2026-09-06T16:49:17.000Z"
+    }
   ]
+};
+
+export const generateDocTemplate = (type, project) => {
+  const name = project?.name || 'Cloud Storage Microservice';
+  const description = project?.description || 'High-throughput S3-compatible multi-cloud distributed storage microservice with chunked encryption and async multipart uploads.';
+  const repo = project?.github_repo || 'expressjs/express';
+
+  if (type === 'readme' || type === 'README') {
+    return `# ${name}
+
+## Overview
+${description}
+
+DevCollab is an enterprise-grade developer collaboration workspace providing Kanban task management, issue tracking, peer code reviews, GitHub synchronization, and AI-assisted technical documentation.
+
+## Features
+- **Project Workspaces**: Multi-tenant project workspace management with role-based member permissions (\`OWNER\`, \`ADMIN\`, \`DEVELOPER\`, \`VIEWER\`).
+- **Kanban Task Board**: Visual sprint workflow supporting \`TODO\`, \`IN_PROGRESS\`, \`REVIEW\`, and \`DONE\` statuses with priority classification.
+- **Issue Tracker**: Full defect lifecycle management with comments, priority weighting, and real-time resolution status.
+- **Code Reviews**: Pull request tracking with inline reviews, approval status, and change requests.
+- **GitHub Integration**: Direct connection to GitHub REST APIs to inspect live branches, commits, and pull requests.
+- **AI Documentation**: Automated technical specification synthesis.
+
+## Technologies
+- **Frontend**: React 18, Vite, React Router 6, Axios, Lucide Icons
+- **Backend**: Node.js, Express.js, REST APIs, JWT (JSON Web Tokens), bcryptjs
+- **Database**: MySQL 8.0, mysql2 connection pooling, normalized schema
+- **APIs**: GitHub REST API, Google Gemini AI API
+
+## Architecture
+\`\`\`
+Client (React + Vite) 
+    ⬇ REST / Bearer JWT 
+API Gateway (Express Router + Auth Middleware)
+    ⬇ Parameterized SQL (mysql2)
+Database (MySQL Normalized Tables)
+\`\`\`
+
+## Installation
+\`\`\`bash
+# 1. Clone repository
+git clone https://github.com/${repo}.git
+cd ${repo.split('/')[1] || 'project'}
+
+# 2. Install backend dependencies
+cd backend && npm install
+
+# 3. Install frontend dependencies
+cd ../frontend && npm install
+\`\`\`
+
+## Environment Variables
+Create a \`.env\` file in the backend root:
+\`\`\`env
+PORT=5000
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=your_password
+DB_NAME=developer_platform
+JWT_SECRET=your_jwt_secret
+GITHUB_CLIENT_ID=your_id
+\`\`\`
+
+## API Endpoints
+- \`POST /api/auth/register\` - Create account
+- \`POST /api/auth/login\` - Login and receive JWT
+- \`GET /api/projects\` - Retrieve projects
+- \`POST /api/projects/:id/tasks\` - Create project task
+- \`GET /api/projects/:id/reviews\` - Retrieve pull request reviews
+
+## Usage
+\`\`\`bash
+# Run backend
+cd backend && npm start
+
+# Run frontend dev server
+cd frontend && npm run dev
+\`\`\`
+
+## Future Improvements
+- Webhook-based live GitHub status synchronization
+- Real-time WebSockets notification broadcast
+- Redis caching for frequent repository metadata
+`;
+  }
+
+  if (type === 'api_docs') {
+    return `# API Reference: ${name}
+
+## Base URL
+\`http://localhost:5000/api\`
+
+## Authentication
+All protected routes require an HTTP Bearer Header:
+\`Authorization: Bearer <token>\`
+
+---
+
+### 1. Authentication Endpoints
+#### \`POST /auth/register\`
+Create a new developer user.
+
+#### \`POST /auth/login\`
+Authenticate and receive JWT Bearer token.
+
+---
+
+### 2. Project Endpoints
+#### \`GET /projects\`
+List all workspaces where the current user is a member.
+
+#### \`POST /projects\`
+Create a new project workspace.
+
+---
+
+### 3. Task Management Endpoints
+#### \`GET /projects/:id/tasks\`
+List all tasks filtered by status or priority.
+
+#### \`POST /projects/:id/tasks\`
+Create task in project.
+`;
+  }
+
+  if (type === 'setup_guide') {
+    return `# Developer Setup & Onboarding Guide
+
+## Project: ${name}
+
+### System Requirements
+- Node.js LTS (v18+ or v20+)
+- MySQL Server 8.0+
+- Git CLI
+
+### 1. Database Setup
+1. Open MySQL CLI or MySQL Workbench.
+2. Execute the schema script:
+\`\`\`bash
+mysql -u root -p < database/schema.sql
+mysql -u root -p < database/seed.sql
+\`\`\`
+
+### 2. Environment Configuration
+Copy \`.env.example\` to \`.env\` in the backend folder and configure database credentials.
+
+### 3. Start Development Servers
+\`\`\`bash
+cd backend && npm run dev
+cd ../frontend && npm run dev
+\`\`\`
+`;
+  }
+
+  return `# Technical Project Summary: ${name}
+
+## Executive Summary
+${description}
+
+### Repository
+Linked GitHub repository: \`${repo}\`
+
+### Core Pillars
+1. High-availability sprint backlog management
+2. Code review workflows and reviewer approvals
+3. Real-time developer contribution metrics
+4. Defect and incident tracking
+`;
 };
 
 // Helper to get synced storage
