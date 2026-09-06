@@ -128,6 +128,31 @@ export const LoginPage = () => {
           >
             {loading ? 'Authenticating...' : 'Sign In'} <ArrowRight size={16} />
           </button>
+
+          <div style={{ display: 'flex', alignItems: 'center', margin: '1.25rem 0 0.75rem', gap: '0.75rem' }}>
+            <div style={{ flex: 1, height: '1px', backgroundColor: 'var(--border-color)' }} />
+            <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>or test deployment</span>
+            <div style={{ flex: 1, height: '1px', backgroundColor: 'var(--border-color)' }} />
+          </div>
+
+          <button
+            type="button"
+            className="btn btn-outline"
+            style={{ width: '100%', padding: '0.65rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}
+            onClick={() => {
+              login({
+                id: 1,
+                name: 'Goutham Reddy',
+                email: 'rgoutham079@gmail.com',
+                role: 'Lead Architect',
+                system_role: 'OWNER',
+                profile_image: 'https://github.com/tembarenigoutham.png'
+              }, 'demo-preview-token');
+              navigate('/dashboard');
+            }}
+          >
+            ⚡ Explore Demo Workspace (Instant Preview)
+          </button>
         </form>
 
         <div style={{

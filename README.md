@@ -2,6 +2,11 @@
 
 > A production-grade, full-stack developer workspace and team collaboration platform built with React, Vite, Node.js, Express, and MySQL.
 
+[![Deploy to GitHub Pages](https://github.com/tembarenigoutham/Developer-Collaboration-Platform/actions/workflows/deploy.yml/badge.svg)](https://github.com/tembarenigoutham/Developer-Collaboration-Platform/actions/workflows/deploy.yml)
+[![CI Build & Test](https://github.com/tembarenigoutham/Developer-Collaboration-Platform/actions/workflows/ci.yml/badge.svg)](https://github.com/tembarenigoutham/Developer-Collaboration-Platform/actions/workflows/ci.yml)
+
+🌐 **Live Demo (GitHub Pages):** [https://tembarenigoutham.github.io/Developer-Collaboration-Platform/](https://tembarenigoutham.github.io/Developer-Collaboration-Platform/)
+
 ---
 
 ## 1. Project Overview
