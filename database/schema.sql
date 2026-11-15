@@ -19,6 +19,12 @@ CREATE TABLE IF NOT EXISTS `users` (
   `password` VARCHAR(255) NOT NULL,
   `profile_image` VARCHAR(500) DEFAULT NULL,
   `system_role` ENUM('OWNER', 'USER') NOT NULL DEFAULT 'USER',
+  `status` ENUM('ACTIVE', 'SUSPENDED') DEFAULT 'ACTIVE',
+  `title` VARCHAR(100) DEFAULT 'Software Engineer',
+  `bio` TEXT DEFAULT NULL,
+  `skills` VARCHAR(255) DEFAULT 'React, Node.js, JavaScript',
+  `github_url` VARCHAR(255) DEFAULT NULL,
+  `linkedin_url` VARCHAR(255) DEFAULT NULL,
   `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   INDEX `idx_users_email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -190,4 +196,18 @@ CREATE TABLE IF NOT EXISTS `notifications` (
   `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   CONSTRAINT `fk_notifications_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
   INDEX `idx_notifications_user_read` (`user_id`, `is_read`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- -----------------------------------------------------------------------------
+-- 12. Project Messages (Team Chat) Table
+-- -----------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `project_messages` (
+  `id` INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  `project_id` INT UNSIGNED NOT NULL,
+  `user_id` INT UNSIGNED NOT NULL,
+  `message` TEXT NOT NULL,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT `fk_messages_project` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_messages_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
+  INDEX `idx_messages_project` (`project_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

@@ -10,6 +10,7 @@ USE `developer_platform`;
 
 -- Disable FK checks for clean seeding
 SET FOREIGN_KEY_CHECKS = 0;
+TRUNCATE TABLE `project_messages`;
 TRUNCATE TABLE `notifications`;
 TRUNCATE TABLE `github_accounts`;
 TRUNCATE TABLE `documents`;
@@ -76,3 +77,8 @@ INSERT INTO `notifications` (`id`, `user_id`, `type`, `message`, `is_read`, `cre
 (1, 1, 'CODE_REVIEW', 'Sarah submitted code review: Feature: Centralized error handling', 0, NOW()),
 (2, 1, 'ISSUE_REPORTED', 'Sarah reported issue: Database pool timeout on concurrent batch requests', 0, NOW()),
 (3, 2, 'TASK_ASSIGNED', 'You were assigned task: Configure MySQL connection pool & migrations', 1, NOW());
+
+-- 11. Seed Project Messages (Team Chat)
+INSERT INTO `project_messages` (`id`, `project_id`, `user_id`, `message`, `created_at`) VALUES
+(1, 1, 1, 'Welcome team! Sprint 1 is live. Let us focus on the MySQL connection pooling and JWT auth milestones.', NOW()),
+(2, 1, 2, 'Thanks Goutham! Working on the connection pool configurations now.', NOW());
