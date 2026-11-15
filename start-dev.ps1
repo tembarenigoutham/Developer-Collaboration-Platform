@@ -1,4 +1,4 @@
-﻿# DevCollab Full-Stack Launcher (PowerShell)
+# DevCollab Full-Stack Launcher (PowerShell)
 $Host.UI.RawUI.WindowTitle = "DevCollab Full-Stack Platform"
 Write-Host "====================================================" -ForegroundColor Cyan
 Write-Host " 🚀 DevCollab - Full-Stack Developer Platform" -ForegroundColor Cyan

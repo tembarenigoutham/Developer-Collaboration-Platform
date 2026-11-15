@@ -5,11 +5,59 @@
 [![Deploy to GitHub Pages](https://github.com/tembarenigoutham/Developer-Collaboration-Platform/actions/workflows/deploy.yml/badge.svg)](https://github.com/tembarenigoutham/Developer-Collaboration-Platform/actions/workflows/deploy.yml)
 [![CI Build & Test](https://github.com/tembarenigoutham/Developer-Collaboration-Platform/actions/workflows/ci.yml/badge.svg)](https://github.com/tembarenigoutham/Developer-Collaboration-Platform/actions/workflows/ci.yml)
 
-🌐 **Live Demo (GitHub Pages):** [https://tembarenigoutham.github.io/Developer-Collaboration-Platform/](https://tembarenigoutham.github.io/Developer-Collaboration-Platform/)
+🌐 **Live Demo (GitHub Pages):** [https://tembarenigoutham.github.io/Developer-Collaboration-Platform/](https://tembarenigoutham.github.io/Developer-Collaboration-Platform/)  
+📦 **GitHub Repository:** [https://github.com/tembarenigoutham/Developer-Collaboration-Platform](https://github.com/tembarenigoutham/Developer-Collaboration-Platform)
 
 ---
 
-## 1. Project Overview
+## 1. How to Use the Platform
+
+### A. Accessing the Application
+You can use DevCollab in two ways:
+1. **Live in Browser (Instant Cloud Demo)**: Open the [Live Demo](https://tembarenigoutham.github.io/Developer-Collaboration-Platform/). The application automatically connects or uses browser state persistence.
+2. **Local Full-Stack Setup (with Node.js & MySQL)**: Run `npm run setup:db` and `npm run dev` to run both the Express backend and React frontend locally.
+
+### B. Sign In / Authentication
+- Click **Login** on the top right.
+- Use one of the pre-configured accounts:
+  - **Email**: `rgoutham079@gmail.com` | **Password**: `password123` *(Lead / Owner)*
+  - **Email**: `sarah@example.com` | **Password**: `password123` *(Backend Dev)*
+  - **Email**: `david@example.com` | **Password**: `password123` *(Frontend Dev)*
+- Or click **Register** to create a brand new developer account.
+
+### C. Navigating the Workspace
+- **Dashboard (`/dashboard`)**: View real-time platform statistics (total projects, active tasks, open issues, pending reviews), recent activity feed, registered team members, and the developer contribution leaderboard.
+- **Projects (`/projects`)**: Browse multi-tenant project workspaces. Click **Create Project** to create a new workspace with a linked GitHub repository.
+- **Kanban Task Board (`/tasks` or Project Details > Tasks)**:
+  - Organize tasks across `TODO`, `IN_PROGRESS`, `REVIEW`, and `DONE` columns.
+  - Create tasks with assigned developers, due dates, and priority levels (`CRITICAL`, `HIGH`, `MEDIUM`, `LOW`).
+  - Move tasks across columns by clicking the status update buttons.
+- **Issue Tracker (`/issues` or Project Details > Issues)**:
+  - Report bugs and feature requests.
+  - Track statuses (`OPEN`, `IN_PROGRESS`, `RESOLVED`, `CLOSED`).
+  - Click on any issue to view discussion comments and post replies.
+- **Code Reviews (`/reviews` or Project Details > Code Reviews)**:
+  - Submit GitHub Pull Request links for peer review.
+  - Assign team reviewers and manage approval workflows (`PENDING`, `APPROVED`, `CHANGES_REQUESTED`).
+  - Add inline review comments and feedback.
+- **GitHub Explorer (`/github` or Project Details > GitHub)**:
+  - Connect your personal GitHub token or view public repositories.
+  - Inspect live branches, latest commit history with SHAs, open issues, and pull requests directly from GitHub REST API.
+- **AI Documentation Generator (`/docs` or Project Details > AI Docs)**:
+  - Select your project and choose a document type:
+    - `README.md`
+    - `API Documentation`
+    - `Developer Setup Guide`
+    - `Project Architecture Summary`
+  - Click **Generate with AI** to synthesize markdown specifications.
+  - Edit in the in-browser markdown editor, copy to clipboard, or save to project database.
+- **Team Chat & Notifications**:
+  - Exchange messages in the project team chat room.
+  - View real-time notification alerts in the top navigation bar.
+
+---
+
+## 2. Project Overview
 
 **DevCollab** is an all-in-one developer productivity and collaboration platform designed for modern engineering teams. It brings together sprint task management, defect tracking, pull request code reviews, GitHub repository insights, and AI-assisted technical documentation synthesis into a unified, responsive developer interface.
 
