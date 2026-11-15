@@ -1,0 +1,27 @@
+{
+  "name": "devcollab-developer-platform",
+  "version": "1.0.0",
+  "description": "Full-Stack Developer Collaboration Platform with React, Node.js, Express, and MySQL",
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/start-dev.js",
+    "start": "node backend/src/server.js",
+    "server": "npm --prefix backend run dev",
+    "client": "npm --prefix frontend run dev",
+    "build": "npm --prefix frontend run build",
+    "setup:db": "node backend/scripts/setup_db.js",
+    "test": "node backend/scripts/test_api.js"
+  },
+  "keywords": [
+    "developer-platform",
+    "react",
+    "nodejs",
+    "express",
+    "mysql",
+    "collaboration",
+    "kanban",
+    "code-reviews"
+  ],
+  "author": "Goutham Reddy",
+  "license": "MIT"
+}

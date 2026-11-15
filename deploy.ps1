@@ -3,8 +3,8 @@ Write-Host "=========================================" -ForegroundColor Cyan
 Write-Host " DevCollab Platform - Deploying to GitHub" -ForegroundColor Cyan
 Write-Host "=========================================" -ForegroundColor Cyan
 
-# Test frontend build before pushing
-$env:Path = "C:\Program Files\nodejs;$env:Path"
+# Refresh environment PATH to locate node/npm
+$env:Path = [System.Environment]::GetEnvironmentVariable("Path","User") + ";" + [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";C:\Program Files\nodejs;" + $env:Path
 Write-Host "`n[1/4] Testing Frontend Production Build..." -ForegroundColor Yellow
 Set-Location frontend
 npm run build

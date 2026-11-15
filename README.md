@@ -217,34 +217,32 @@ All tables implement foreign keys with cascade deletions, indexing on foreign ke
 
 ### Step 1: Clone Repository
 ```bash
-git clone https://github.com/your-username/Developer-Collaboration-Platform.git
+git clone https://github.com/tembarenigoutham/Developer-Collaboration-Platform.git
 cd Developer-Collaboration-Platform
 ```
 
-### Step 2: Database Initialization
-Log in to MySQL and run the schema and seed scripts:
+### Step 2: Automated 1-Click Database Setup
+Ensure MySQL is running, then run the automated setup script which creates the database, loads the schema, runs migrations, and seeds initial data:
 ```bash
-mysql -u root -p < database/schema.sql
-mysql -u root -p < database/seed.sql
+npm run setup:db
 ```
 
-### Step 3: Backend Setup
+### Step 3: Run Full-Stack (Backend + Frontend)
+Launch both the Express backend API (Port 5000) and the Vite React frontend (Port 5173) simultaneously:
 ```bash
-cd backend
-cp .env.example .env
-# Edit .env with your MySQL password and JWT secret
-npm install
-npm start
-```
-*Backend runs at `http://localhost:5000` with health check at `http://localhost:5000/api/health`.*
-
-### Step 4: Frontend Setup
-```bash
-cd ../frontend
-npm install
+# Using npm
 npm run dev
+
+# Or on Windows, double-click or run:
+.\start-dev.bat
 ```
-*Frontend runs at `http://localhost:5173` with automatic proxy to the backend API.*
+*Frontend runs at `http://localhost:5173` with automatic `/api` proxy to the backend API at `http://localhost:5000`.*
+
+### Step 4: Run Backend Test Suite
+Run the automated end-to-end API test suite:
+```bash
+npm test
+```
 
 ---
 
@@ -252,9 +250,9 @@ npm run dev
 
 Pre-configured seed accounts for immediate testing:
 
-| Email | Password | Role | Project Assigned |
+| Email | Password | Role | Workspace |
 | :--- | :--- | :--- | :--- |
-| `alex@example.com` | `password123` | Lead Architect (OWNER) | Cloud Storage Microservice, DevCollab Web Client |
+| `rgoutham079@gmail.com` | `password123` | Platform Lead / Admin (OWNER) | Cloud Storage Microservice, DevCollab Web Client |
 | `sarah@example.com` | `password123` | Senior Backend Dev (DEVELOPER) | Cloud Storage Microservice |
 | `david@example.com` | `password123` | Frontend Specialist (ADMIN) | DevCollab Web Client |
 
