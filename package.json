@@ -10,6 +10,7 @@
     "client": "npm --prefix frontend run dev",
     "build": "npm --prefix frontend run build",
     "setup:db": "node backend/scripts/setup_db.js",
+    "view:data": "node backend/scripts/view_data.js",
     "test": "node backend/scripts/test_api.js"
   },
   "keywords": [
